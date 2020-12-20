@@ -4,7 +4,7 @@
   "name": "Playground",
   "author": "Auros",
   "version": "1.0.0",
-  "description": "Adds a variety of mini games to Beat Saber",
+  "description": "Adds a variety of mini games to Beat Saber.",
   "gameVersion": "1.13.0",
   "dependsOn": {
     "SiraUtil": "^2.3.0",
