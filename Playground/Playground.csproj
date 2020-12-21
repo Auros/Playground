@@ -37,6 +37,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <Reference Include="BSML">
+          <HintPath>$(BeatSaberDir)\Plugins\BSML.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
         <Reference Include="HMRendering">
           <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\HMRendering.dll</HintPath>
           <Private>False</Private>

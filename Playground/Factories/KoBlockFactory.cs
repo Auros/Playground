@@ -19,7 +19,9 @@ namespace Playground.Factories
         {
             GameObject gameObject = _container.InstantiatePrefab(_blockPrefab, Vector3.zero, Quaternion.identity, null);
             KoBlock koBlock = _container.InstantiateComponent<KoBlock>(gameObject);
+            koBlock.transform.localRotation = Quaternion.identity;
             gameObject.name = $"{nameof(KoBlock)} (Factorized)";
+            koBlock.transform.localPosition = Vector3.zero;
             koBlock.gameObject.SetActive(false);
             gameObject.SetActive(false);
             return koBlock;
