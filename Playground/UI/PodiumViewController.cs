@@ -1,5 +1,4 @@
-﻿using Zenject;
-using SiraUtil.Tools;
+﻿using System;
 using Playground.Interfaces;
 using System.Collections.Generic;
 using BeatSaberMarkupLanguage.Attributes;
@@ -11,6 +10,8 @@ namespace Playground.UI
     [HotReload(RelativePathToLayout = @"..\Views\podium-view.bsml")]
     internal class PodiumViewController : BSMLAutomaticViewController
     {
+        public event Action<IKoGame?>? ModeSelected;
+
         [UIValue("-")]
         protected object value = null!;
 
@@ -30,8 +31,9 @@ namespace Playground.UI
         }
 
         [UIAction("mode-selected")]
-        protected void ModeSelected(object value)
+        protected void Selected(object value)
         {
+            ModeSelected?.Invoke(value is IKoGame game ? game! : null);
             if (value is IKoGame koGame)
             {
                 Test = koGame.Name;

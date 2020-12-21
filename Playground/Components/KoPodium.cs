@@ -22,8 +22,6 @@ namespace Playground.Components
             _neck.transform.SetParent(transform);
             _base.transform.SetParent(transform);
 
-            transform.localPosition += new Vector3(0f, 0f, -1f);
-            transform.localRotation = Quaternion.Euler(new Vector3(0f, 180f, 0));
             _face.transform.localPosition = new Vector3(0f, 0.95f, 0f);
             _face.transform.localRotation = new Quaternion(0.3826835f, 0f, 0f, 0.9238795f);
             _face.transform.localScale = new Vector3(2.5f, 2.5f, 0.25f);

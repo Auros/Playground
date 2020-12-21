@@ -19,6 +19,7 @@ namespace Playground
 
             zenjector
                 .OnMenu<PlaygroundMenuInstaller>()
+                .Expose<BloomFogEnvironment>()
                 .Mutate<BloomFogEnvironment>((ctx, _) =>
                 {
                     var mat = ctx.GetInjected<MaterialPropertyBlockController>(bc => bc.name == "Note (16)" && bc.transform.parent.name == "LevitatingNote");

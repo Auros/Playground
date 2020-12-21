@@ -18,6 +18,8 @@ namespace Playground.Installers
             Container.BindFactory<KoPodium, KoPodiumFactory.Fact>().FromFactory<KoPodiumFactory>();
 
             // Stuff
+            Container.Bind<JojoPodiumManager>().AsSingle();
+            Container.Bind<DenyahBackNoteManager>().AsSingle();
             Container.Bind(typeof(IKoGameManager), typeof(IInitializable), typeof(IDisposable)).To<KoGameManager>().AsSingle();
 
             // UI
