@@ -1,5 +1,7 @@
 ﻿using System;
 using Zenject;
+using SiraUtil;
+using Playground.UI;
 using Playground.Managers;
 using Playground.Factories;
 using Playground.Components;
@@ -19,6 +21,7 @@ namespace Playground.Installers
             Container.Bind(typeof(IKoGameManager), typeof(IInitializable), typeof(IDisposable)).To<KoGameManager>().AsSingle();
 
             // UI
+            Container.Bind<PodiumViewController>().FromNewComponentAsViewController().AsSingle();
         }
     }
 }
