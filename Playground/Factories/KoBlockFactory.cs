@@ -4,7 +4,7 @@ using Playground.Components;
 
 namespace Playground.Factories
 {
-    public class KoBlockFactory : IFactory<KoBlock>
+    public class KoBlockFactory : IFactory<KoBlock> 
     {
         private readonly DiContainer _container;
         private readonly GameObject _blockPrefab;

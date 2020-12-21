@@ -37,7 +37,6 @@ namespace Playground.Managers
         public void Initialize()
         {
             _podiumViewController.modes.Add("discard");
-            _podiumViewController.modes.Add(new BlockHunt.BlockHuntGame());
             _podium.SetViewController(_podiumViewController);
 
             _jojoPodiumManager.Init(_podium, 180f, 130f);

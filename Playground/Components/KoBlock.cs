@@ -12,6 +12,8 @@ namespace Playground.Components
             var matBlockController = GetComponent<MaterialPropertyBlockController>();
             var renderer = matBlockController.renderers[0];
             _material = renderer.material;
+
+
             /*
             var v = Random.insideUnitSphere * 5;
             v.y = Mathf.Abs(v.y);

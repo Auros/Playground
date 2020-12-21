@@ -6,6 +6,7 @@ using Playground.Managers;
 using Playground.Factories;
 using Playground.Components;
 using Playground.Interfaces;
+using Playground.BlockHunt;
 
 namespace Playground.Installers
 {
@@ -24,6 +25,35 @@ namespace Playground.Installers
 
             // UI
             Container.Bind<PodiumViewController>().FromNewComponentAsViewController().AsSingle();
+
+            // Gamemodes
+            Container.BindInterfacesTo<BlockHuntGame>().AsSingle();
+            Container.BindInterfacesTo<Dummy>().AsSingle();
+        }
+        private class Dummy : IKoGame
+        {
+            public string Name => "Dummy";
+
+            public void Begin()
+            {
+                throw new NotImplementedException();
+            }
+
+            public void Create()
+            {
+                throw new NotImplementedException();
+            }
+
+            public void Destroy()
+            {
+                throw new NotImplementedException();
+            }
+
+            public void Stop()
+            {
+                throw new NotImplementedException();
+            }
         }
     }
+
 }
