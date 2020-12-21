@@ -37,6 +37,14 @@ namespace Playground.Managers
         public void Initialize()
         {
             _podiumViewController.modes.Add("discard");
+            foreach (var ko in _koGames)
+            {
+                if (ko.Name == "Dummy")
+                {
+                    continue;
+                }
+                _podiumViewController.modes.Add(ko);
+            }
             _podium.SetViewController(_podiumViewController);
 
             _jojoPodiumManager.Init(_podium, 180f, 130f);
@@ -47,12 +55,15 @@ namespace Playground.Managers
         {
             if (ko is null)
             {
-                _jojoPodiumManager.Return();
-                _denyahBackNoteManager.Revert(true);
+                ActiveMode?.Destroy();
+                //_jojoPodiumManager.Return();
+                //_denyahBackNoteManager.Revert(true);
                 return;
             }
-            _jojoPodiumManager.MoveOutOfTheWay();
-            _denyahBackNoteManager.Yeet(2.5f, 5, 15);
+            ActiveMode = ko;
+            ActiveMode?.Create();
+            //_jojoPodiumManager.MoveOutOfTheWay();
+            //_denyahBackNoteManager.Yeet(2.5f, 5, 15);
         }
 
         public void Dispose()
