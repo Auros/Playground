@@ -37,6 +37,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <Reference Include="HMRendering">
+          <HintPath>$(BeatSaberDir)\Beat Saber_Data\Managed\HMRendering.dll</HintPath>
+          <Private>False</Private>
+        </Reference>
         <Reference Include="SiraUtil">
           <HintPath>$(BeatSaberDir)\Plugins\SiraUtil.dll</HintPath>
           <Private>False</Private>
