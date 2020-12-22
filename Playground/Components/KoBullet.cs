@@ -9,7 +9,7 @@ namespace Playground.Components
     {
         public Color Color { get; set; }
         public string? NameMask { get; set; }
-        public float DespawnDistance { get; set; } = 20f;
+        public float DespawnDistance { get; set; } = 100f;
 
         public event Action<KoBullet, GameObject>? DidHit;
         public event Action<KoBullet>? DidDespawn;
