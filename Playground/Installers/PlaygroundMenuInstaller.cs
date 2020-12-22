@@ -31,7 +31,7 @@ namespace Playground.Installers
 
             // Gamemodes
             Container.BindInterfacesTo<BlockHuntGame>().AsSingle();
-            Container.Bind<ShootingManager>().AsSingle();
+            Container.BindInterfacesAndSelfTo<ShootingManager>().AsSingle();
 
             Container.BindInterfacesTo<Dummy>().AsSingle();
         }

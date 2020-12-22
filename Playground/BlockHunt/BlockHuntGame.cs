@@ -1,7 +1,6 @@
 ﻿using Zenject;
 using Tweening;
 using UnityEngine;
-using Playground.Factories;
 using Playground.Components;
 using Playground.Interfaces;
 using System.Threading.Tasks;
@@ -27,6 +26,9 @@ namespace Playground.BlockHunt
         private readonly TweeningManager _tweeningManager;
         private readonly List<Duck> _activeDucks = new List<Duck>();
         private readonly List<KoBlock> _environmentBlocks = new List<KoBlock>();
+
+        private float _cycleTime = 0f;
+        private readonly float _cycleLength = 2f;
 
         public BlockHuntGame(Duck.Pool duckPool, KoBlock.Pool koBlockPool, ShootingManager shootingManager, TweeningManager tweeningManager)
         {
@@ -71,6 +73,7 @@ namespace Playground.BlockHunt
         public void Begin()
         {
             _isActive = true;
+            _shootingManager.Enable();
         }
 
         public void Create()
@@ -80,9 +83,9 @@ namespace Playground.BlockHunt
                 _koBlockPool.Despawn(block);
             }
             _environmentBlocks.Clear();
-            _ = CreateLane(5, 10, 3);
-            _ = CreateLane(7, 20, 4);
-            _ = CreateLane(9, 35, 5);
+            _ = CreateLane(7, 15, 3);
+            _ = CreateLane(9, 25, 4);
+            _ = CreateLane(13, 55, 6);
         }
 
         public async void Destroy()
@@ -99,10 +102,8 @@ namespace Playground.BlockHunt
         public void Stop()
         {
             _isActive = false;
+            _shootingManager.Disable();
         }
-
-        private float _cycleTime = 0f;
-        private readonly float _cycleLength = 2f;
 
         private void DespawnNote(KoBlock block)
         {

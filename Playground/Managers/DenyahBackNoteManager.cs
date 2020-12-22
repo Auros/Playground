@@ -80,7 +80,8 @@ namespace Playground.Managers
             }
             foreach (var denyah in _objectStates)
             {
-                _tweeningManager.AddTween(new Vector3Tween(denyah.transform.localPosition, denyah.pose.position, (val) =>
+                denyah.transform.gameObject.SetActive(true);
+                var mainTween = _tweeningManager.AddTween(new Vector3Tween(denyah.transform.localPosition, denyah.pose.position, (val) =>
                 {
                     denyah.transform.localPosition = val;
                 }, 2f, EaseType.OutQuad), denyah.transform.gameObject);

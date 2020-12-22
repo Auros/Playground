@@ -39,6 +39,7 @@ namespace Playground.Components
             _bulletBody.Color = Color * 10f;
             _bulletBody.transform.SetParent(transform);
             _bulletBody.transform.localPosition = Vector3.zero;
+            _bulletBody.transform.localRotation = Quaternion.identity;
             _bulletBody.transform.localScale = new Vector3(0.1f, 0.1f, 1f);
         }
 
@@ -49,7 +50,7 @@ namespace Playground.Components
                 return;
             }
 
-            gameObject.transform.localPosition += Vector3.forward * _speed.Value * Time.deltaTime;
+            gameObject.transform.Translate(0, 0, _speed.Value * Time.deltaTime, Space.Self); //.localPosition += Vector3.forward * _speed.Value * Time.deltaTime;
         }
 
         protected void FixedUpdate()
@@ -66,7 +67,7 @@ namespace Playground.Components
                 return;
             }
 
-            Collider[] hits = Physics.OverlapBox(gameObject.transform.localPosition, _bulletBody!.transform.localScale / 2f, Quaternion.identity);
+            Collider[] hits = Physics.OverlapBox(gameObject.transform.localPosition, _bulletBody!.transform.localScale * 2f, Quaternion.identity);
 
             bool doMask = NameMask != null;
             foreach (var hit in hits)

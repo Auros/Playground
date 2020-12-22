@@ -1,7 +1,9 @@
 ﻿using HMUI;
 using Zenject;
 using UnityEngine;
+using VRUIControls;
 using BeatSaberMarkupLanguage.FloatingScreen;
+using IPA.Utilities;
 
 namespace Playground.Components
 {
@@ -11,10 +13,13 @@ namespace Playground.Components
         private KoBlock _neck = null!;
         private KoBlock _face = null!;
         private FloatingScreen _floatingScreen = null!;
+        private PhysicsRaycasterWithCache _physicsRaycasterWithCache = null!;
 
         [Inject]
-        protected void Construct(KoBlock.Pool koBlockPool)
+        protected void Construct(KoBlock.Pool koBlockPool, PhysicsRaycasterWithCache physicsRaycasterWithCache)
         {
+            _physicsRaycasterWithCache = physicsRaycasterWithCache;
+
             _face = koBlockPool.Spawn();
             _neck = koBlockPool.Spawn();
             _base = koBlockPool.Spawn();
@@ -42,6 +47,7 @@ namespace Playground.Components
         public void SetViewController(ViewController viewController)
         {
             _floatingScreen.SetRootViewController(viewController, ViewController.AnimationType.In);
+            _floatingScreen.GetComponent<VRGraphicRaycaster>().SetField("_physicsRaycaster", _physicsRaycasterWithCache);
         }
     }
 }

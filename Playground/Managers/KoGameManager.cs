@@ -6,6 +6,7 @@ using Playground.Factories;
 using Playground.Interfaces;
 using Playground.Components;
 using System.Collections.Generic;
+using VRUIControls;
 
 namespace Playground.Managers
 {

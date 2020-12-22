@@ -60,7 +60,7 @@ namespace Playground.Components
             bullet.Color = Color.red;
 
             bullet.NameMask = Mask;
-            bullet.Launch(_barrelTip.transform.position, _barrelTip.transform.rotation, 25f);
+            bullet.Launch(_barrelTip.transform.position, _barrelTip.transform.rotation, 80f);
             bullet.DidDespawn += Bullet_DidDespawn;
             bullet.DidHit += Bullet_DidHit;
         }
