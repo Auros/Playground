@@ -3,10 +3,10 @@ using Zenject;
 using SiraUtil;
 using Playground.UI;
 using Playground.Managers;
+using Playground.BlockHunt;
 using Playground.Factories;
 using Playground.Components;
 using Playground.Interfaces;
-using Playground.BlockHunt;
 
 namespace Playground.Installers
 {
@@ -17,6 +17,7 @@ namespace Playground.Installers
             // Factories
             Container.BindMemoryPool<KoBlock, KoBlock.Pool>().WithInitialSize(10).FromFactory<KoBlockFactory>();
             Container.BindFactory<KoPodium, KoPodiumFactory.Fact>().FromFactory<KoPodiumFactory>();
+            Container.BindMemoryPool<Duck, Duck.Pool>().WithInitialSize(2).FromFactory<DuckFactory>();
 
             // Stuff
             Container.Bind<JojoPodiumManager>().AsSingle();
