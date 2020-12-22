@@ -1,7 +1,7 @@
-﻿using SiraUtil.Objects;
-using System.Collections.Generic;
-using Tweening;
+﻿using Tweening;
 using UnityEngine;
+using SiraUtil.Objects;
+using System.Collections.Generic;
 
 namespace Playground.Managers
 {
@@ -56,7 +56,7 @@ namespace Playground.Managers
             foreach (var denyah in _objectStates)
             {
                 var duration = Random.Range(minDuration, maxDuration);
-                _tweeningManager.AddTween(new Vector3Tween(denyah.pose.position, denyah.pose.position + new Vector3(0f, height, 0f), (val) =>
+                var mainTween = _tweeningManager.AddTween(new Vector3Tween(denyah.pose.position, denyah.pose.position + new Vector3(0f, height, 0f), (val) =>
                 {
                     denyah.transform.SetLocalPositionAndRotation(val, Quaternion.Euler(denyah.transform.localRotation.eulerAngles + new Vector3(0f, 0f, duration)));
                 }, duration, EaseType.InCubic), denyah.transform.gameObject);
@@ -64,6 +64,10 @@ namespace Playground.Managers
                 {
                     denyah.transform.localRotation = Quaternion.Euler(val);
                 }, duration, EaseType.InCubic), denyah.transform.gameObject);
+                mainTween.onCompleted = delegate ()
+                {
+                    denyah.transform.gameObject.SetActive(false);
+                };
             }
         }
 

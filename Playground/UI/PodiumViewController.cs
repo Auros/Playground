@@ -1,4 +1,6 @@
 ﻿using System;
+using UnityEngine;
+using UnityEngine.UI;
 using Playground.Interfaces;
 using System.Collections.Generic;
 using BeatSaberMarkupLanguage.Attributes;
@@ -11,6 +13,8 @@ namespace Playground.UI
     internal class PodiumViewController : BSMLAutomaticViewController
     {
         public event Action<IKoGame?>? ModeSelected;
+        public event Action<IKoGame>? PlayRequested;
+        public event Action<IKoGame>? StopRequested;
 
         [UIValue("-")]
         protected object value = null!;
@@ -30,6 +34,24 @@ namespace Playground.UI
             }
         }
 
+        private string _actionText = "Play";
+        [UIValue("action-text")]
+        public string ActionText
+        {
+            get => _actionText;
+            set
+            {
+                _actionText = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        [UIComponent("play-stop-button")]
+        protected Button playStopButton = null!;
+
+        [UIComponent("dropdown")]
+        protected RectTransform dropdownRect = null!;
+
         [UIAction("mode-selected")]
         protected void Selected(object value)
         {
@@ -37,8 +59,12 @@ namespace Playground.UI
             if (value is IKoGame koGame)
             {
                 Test = koGame.Name;
+                ActionText = "Play";
+                playStopButton.interactable = true;
                 return;
             }
+            playStopButton.interactable = false;
+            ActionText = "Play";
             Test = "None";
         }
 
@@ -50,6 +76,24 @@ namespace Playground.UI
                 return koGame.Name;
             }
             return "None";
+        }
+
+        [UIAction("play")]
+        protected void Play()
+        {
+            if (value is IKoGame koGame)
+            {
+                if (koGame.Playing)
+                {
+                    ActionText = "Play";
+                    StopRequested?.Invoke(koGame);
+                }
+                else
+                {
+                    ActionText = "Stop";
+                    PlayRequested?.Invoke(koGame);
+                }
+            }
         }
     }
 }

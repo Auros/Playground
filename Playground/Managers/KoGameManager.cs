@@ -46,9 +46,25 @@ namespace Playground.Managers
                 _podiumViewController.modes.Add(ko);
             }
             _podium.SetViewController(_podiumViewController);
-
             _jojoPodiumManager.Init(_podium, 180f, 130f);
+
+            _podiumViewController.PlayRequested += Play;
+            _podiumViewController.StopRequested += Stop;
             _podiumViewController.ModeSelected += ModeSelected;
+        }
+
+        private void Play(IKoGame ko)
+        {
+            ko.Begin();
+            _jojoPodiumManager.MoveOutOfTheWay();
+            _denyahBackNoteManager.Yeet(1.5f, 3, 25);
+        }
+
+        private void Stop(IKoGame ko)
+        {
+            ko.Stop();
+            _jojoPodiumManager.Return();
+            _denyahBackNoteManager.Revert(true);
         }
 
         private void ModeSelected(IKoGame? ko)
@@ -68,6 +84,7 @@ namespace Playground.Managers
 
         public void Dispose()
         {
+            _podiumViewController.PlayRequested -= Play;
             _podiumViewController.ModeSelected -= ModeSelected;
         }
     }

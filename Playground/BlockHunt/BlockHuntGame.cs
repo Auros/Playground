@@ -12,13 +12,19 @@ namespace Playground.BlockHunt
     {
         public string Name => "Block Hunt";
 
+        public bool Playing => _isActive;
+
+        public bool Activating => throw new System.NotImplementedException();
+
+        public bool Deactivating => throw new System.NotImplementedException();
+
+        private bool _isActive = false;
         private readonly Duck.Pool _duckPool;
-        private readonly KoBlock.Pool _koBlockPool;
         private readonly GameObject _blockHuntRoot;
+        private readonly KoBlock.Pool _koBlockPool;
+        private readonly TweeningManager _tweeningManager;
         private readonly List<Duck> _activeDucks = new List<Duck>();
         private readonly List<KoBlock> _environmentBlocks = new List<KoBlock>();
-        private readonly TweeningManager _tweeningManager;
-        private bool _isActive = false;
 
         public BlockHuntGame(Duck.Pool duckPool, KoBlock.Pool koBlockPool, TweeningManager tweeningManager)
         {
@@ -54,14 +60,14 @@ namespace Playground.BlockHunt
                     
                     _environmentBlocks.Add(block);
 
-                    await SiraUtil.Utilities.AwaitSleep(10);
+                    await SiraUtil.Utilities.AwaitSleep(5);
                 }
             }
         }
 
         public void Begin()
         {
-
+            _isActive = true;
         }
 
         public void Create()
@@ -71,10 +77,9 @@ namespace Playground.BlockHunt
                 _koBlockPool.Despawn(block);
             }
             _environmentBlocks.Clear();
-            _ = CreateLane(3, 10, 3);
-            _ = CreateLane(5, 20, 4);
-            _ = CreateLane(7, 35, 5);
-            _isActive = true;
+            _ = CreateLane(5, 10, 3);
+            _ = CreateLane(7, 20, 4);
+            _ = CreateLane(9, 35, 5);
         }
 
         public async void Destroy()
@@ -82,28 +87,32 @@ namespace Playground.BlockHunt
             _isActive = false;
             foreach (var block in _environmentBlocks)
             {
-                var pos = block.transform.localPosition;
-                _tweeningManager.AddTween(new FloatTween(pos.y, pos.y + 50, (val) =>
-                {
-                    block.transform.localPosition = new Vector3(pos.x, val, pos.z);
-                }, 1f, EaseType.InCubic), block.gameObject);
-                await SiraUtil.Utilities.AwaitSleep(10);
-            }
-        }
-
-        public void Stop()
-        {
-            foreach (var block in _environmentBlocks)
-            {
-                _environmentBlocks.Remove(block);
-                _koBlockPool.Despawn(block);
+                DespawnNote(block);
+                await SiraUtil.Utilities.AwaitSleep(5);
             }
             _environmentBlocks.Clear();
         }
 
+        public void Stop()
+        {
+            _isActive = false;
+        }
 
         private float _cycleTime = 0f;
         private readonly float _cycleLength = 2f;
+
+        private void DespawnNote(KoBlock block)
+        {
+            var pos = block.transform.localPosition;
+            var tween = _tweeningManager.AddTween(new FloatTween(pos.y, pos.y + 50, (val) =>
+            {
+                block.transform.localPosition = new Vector3(pos.x, val, pos.z);
+            }, 1f, EaseType.InCubic), block.gameObject);
+            tween.onCompleted = delegate ()
+            {
+                _koBlockPool.Despawn(block);
+            };
+        }
 
         public void Tick()
         {
@@ -120,8 +129,8 @@ namespace Playground.BlockHunt
                     duckA.transform.SetParent(_blockHuntRoot.transform);
                     duckB.transform.SetParent(_blockHuntRoot.transform);
 
-                    duckA.Init(ran.transform.localPosition + new Vector3(0f, 0f, 1f));
-                    duckB.Init(ran2.transform.localPosition + new Vector3(0f, 0f, 1f));
+                    duckA.Init(ran.transform.localPosition + new Vector3(0f, 0f, 2f));
+                    duckB.Init(ran2.transform.localPosition + new Vector3(0f, 0f, 2f));
 
                     duckA.DidEscape += DidEscape;
                     duckB.DidEscape += DidEscape;

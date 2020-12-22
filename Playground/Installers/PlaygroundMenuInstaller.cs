@@ -35,6 +35,12 @@ namespace Playground.Installers
         {
             public string Name => "Dummy";
 
+            public bool Playing => throw new NotImplementedException();
+
+            public bool Activating => throw new NotImplementedException();
+
+            public bool Deactivating => throw new NotImplementedException();
+
             public void Begin()
             {
                 throw new NotImplementedException();

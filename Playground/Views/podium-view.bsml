@@ -1,5 +1,5 @@
 ﻿<vertical xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://monkeymanboy.github.io/BSML-Docs/ https://raw.githubusercontent.com/monkeymanboy/BSML-Docs/gh-pages/BSMLSchema.xsd">
-  <dropdown-list-setting text="" pref-width="35" value="-" options="modes" apply-on-change="true" formatter="mode-format" on-change="mode-selected" />
+  <dropdown-list-setting id="dropdown" text="" pref-width="35" value="-" options="modes" apply-on-change="true" formatter="mode-format" on-change="mode-selected" />
   <text text="~test" align="Center" font-size="5" />
-  <action-button text="Play" pref-width="25" pref-height="10" />
+  <action-button id="play-stop-button" text="~action-text" on-click="play" pref-width="25" pref-height="10" />
 </vertical>

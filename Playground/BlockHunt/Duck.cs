@@ -18,6 +18,7 @@ namespace Playground.BlockHunt
         private float _cycleTime = 0f;
         private readonly float _cycleLength = 0.02f;
 
+        private string _prevName = "?";
         private bool _goingRight = true;
         private int _decisions = 0;
 
@@ -33,8 +34,10 @@ namespace Playground.BlockHunt
             {
                 _body = _koBlockPool.Spawn();
                 _body.transform.SetParent(transform, false);
+                _prevName = _body.name;
+                _body.name = "DuckBody";
 
-                _body.transform.localScale = Vector3.one;
+                _body.transform.localScale = Vector3.one * 2;
                 _body.transform.localPosition = Vector3.zero; 
                 _body.transform.localRotation = Quaternion.identity;
 
@@ -78,6 +81,7 @@ namespace Playground.BlockHunt
         {
             if (_active)
             {
+                _body!.name = _prevName;
                 _koBlockPool.Despawn(_body!);
                 _active = false;
             }
