@@ -37,6 +37,10 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <None Remove="Resources\0001.png" />
+      <None Remove="Resources\1000.png" />
+      <None Remove="Resources\AmeSpin.gif" />
+      <None Remove="Resources\umbra.jpg" />
       <None Remove="Views\podium-view.bsml" />
     </ItemGroup>
 
@@ -125,6 +129,9 @@
 
     <ItemGroup>
         <EmbeddedResource Include="manifest.json" />
+        <EmbeddedResource Include="Resources\0001.png" />
+        <EmbeddedResource Include="Resources\1000.png" />
+        <EmbeddedResource Include="Resources\umbra.jpg" />
         <EmbeddedResource Include="Views\podium-view.bsml" />
     </ItemGroup>
 

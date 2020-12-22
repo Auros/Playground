@@ -21,6 +21,9 @@ namespace Playground.Installers
             Container.BindFactory<KoPodium, KoPodiumFactory.Fact>().FromFactory<KoPodiumFactory>();
             Container.BindFactory<KoGun, KoGunFactory.Fact>().FromFactory<KoGunFactory>();
 
+
+            Container.BindMemoryPool<FlyingSpriteEffect, FlyingSpriteEffect.Pool>().WithInitialSize(10).FromFactory<FlyingImageEffectFactory>();
+
             // Stuff
             Container.Bind<JojoPodiumManager>().AsSingle();
             Container.Bind<DenyahBackNoteManager>().AsSingle();
@@ -32,6 +35,7 @@ namespace Playground.Installers
             // Gamemodes
             Container.BindInterfacesTo<BlockHuntGame>().AsSingle();
             Container.BindInterfacesAndSelfTo<ShootingManager>().AsSingle();
+            Container.BindInterfacesAndSelfTo<ScoreEffectManager>().AsSingle();
 
             Container.BindInterfacesTo<Dummy>().AsSingle();
         }

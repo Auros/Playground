@@ -30,7 +30,6 @@ namespace Playground.Components
 
         public void Launch(Vector3 pos, Quaternion rot, float speed)
         {
-            _siraLog.Info("Launching Bullet");
             _origin = pos;
             _speed = speed;
             transform.position = pos;
