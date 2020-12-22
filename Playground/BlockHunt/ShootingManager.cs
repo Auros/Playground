@@ -68,6 +68,12 @@ namespace Playground.BlockHunt
             if (_shootingEnabled)
             {
                 var triggerValue = _vrControllersInputManager.TriggerValue(_menuPlayerController.rightController.node);
+                /*if (triggerValue > 0.5f && !_didRecentlyShoot)
+                {
+                    _koGun.Shoot();
+                    _didRecentlyShoot = false;
+                    _vrPlatformHelper.TriggerHapticPulse(_menuPlayerController.rightController.node, 0.1f, 0.7f, 0);
+                }*/
                 if (triggerValue > 0.5f && !_didRecentlyShoot)
                 {
                     _didRecentlyShoot = true;

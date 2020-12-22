@@ -124,7 +124,7 @@ namespace Playground.BlockHunt
             {
                 if (_cycleTime >= _cycleLength)
                 {
-                    var ran = _environmentBlocks[Random.Range(0, _environmentBlocks.Count)];
+                    /*var ran = _environmentBlocks[Random.Range(0, _environmentBlocks.Count)];
                     var ran2 = _environmentBlocks[Random.Range(0, _environmentBlocks.Count)];
 
                     var duckA = _duckPool.Spawn();
@@ -138,10 +138,25 @@ namespace Playground.BlockHunt
 
                     duckA.DidEscape += DidEscape;
                     duckB.DidEscape += DidEscape;
+                    */
 
+                    SpawnWave(2);
                     _cycleTime = 0;
                 }
                 _cycleTime += Time.deltaTime;
+            }
+        }
+
+        private void SpawnWave(int count)
+        {
+            for (int i = 0; i < count; i++)
+            {
+                var ran = _environmentBlocks[Random.Range(0, _environmentBlocks.Count)];
+                var duck = _duckPool.Spawn();
+
+                duck.transform.SetParent(_blockHuntRoot.transform);
+                duck.Init(ran.transform.localPosition + new Vector3(0f, 0f, 2f));
+                duck.DidEscape += DidEscape;
             }
         }
 
