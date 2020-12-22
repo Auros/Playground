@@ -2,6 +2,7 @@
 using Zenject;
 using UnityEngine;
 using Playground.Components;
+using SiraUtil.Tools;
 
 namespace Playground.BlockHunt
 {
@@ -13,6 +14,7 @@ namespace Playground.BlockHunt
 
         private bool _active;
         private KoBlock? _body;
+        private SiraLog _siraLog = null!;
         private KoBlock.Pool _koBlockPool = null!;
 
         private float _cycleTime = 0f;
@@ -23,8 +25,9 @@ namespace Playground.BlockHunt
         private int _decisions = 0;
 
         [Inject]
-        protected void Construct(KoBlock.Pool koBlockPool)
+        protected void Construct(SiraLog siraLog, KoBlock.Pool koBlockPool)
         {
+            _siraLog = siraLog;
             _koBlockPool = koBlockPool;
         }
 

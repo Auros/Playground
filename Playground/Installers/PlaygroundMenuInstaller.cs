@@ -15,9 +15,11 @@ namespace Playground.Installers
         public override void InstallBindings()
         {
             // Factories
+            Container.BindMemoryPool<KoBullet, KoBullet.Pool>().WithInitialSize(5).FromFactory<KoBulletFactory>();
             Container.BindMemoryPool<KoBlock, KoBlock.Pool>().WithInitialSize(10).FromFactory<KoBlockFactory>();
-            Container.BindFactory<KoPodium, KoPodiumFactory.Fact>().FromFactory<KoPodiumFactory>();
             Container.BindMemoryPool<Duck, Duck.Pool>().WithInitialSize(2).FromFactory<DuckFactory>();
+            Container.BindFactory<KoPodium, KoPodiumFactory.Fact>().FromFactory<KoPodiumFactory>();
+            Container.BindFactory<KoGun, KoGunFactory.Fact>().FromFactory<KoGunFactory>();
 
             // Stuff
             Container.Bind<JojoPodiumManager>().AsSingle();
@@ -29,6 +31,8 @@ namespace Playground.Installers
 
             // Gamemodes
             Container.BindInterfacesTo<BlockHuntGame>().AsSingle();
+            Container.Bind<ShootingManager>().AsSingle();
+
             Container.BindInterfacesTo<Dummy>().AsSingle();
         }
         private class Dummy : IKoGame

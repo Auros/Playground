@@ -1,6 +1,7 @@
 ﻿using Zenject;
 using Tweening;
 using UnityEngine;
+using Playground.Factories;
 using Playground.Components;
 using Playground.Interfaces;
 using System.Threading.Tasks;
@@ -22,14 +23,16 @@ namespace Playground.BlockHunt
         private readonly Duck.Pool _duckPool;
         private readonly GameObject _blockHuntRoot;
         private readonly KoBlock.Pool _koBlockPool;
+        private readonly ShootingManager _shootingManager;
         private readonly TweeningManager _tweeningManager;
         private readonly List<Duck> _activeDucks = new List<Duck>();
         private readonly List<KoBlock> _environmentBlocks = new List<KoBlock>();
 
-        public BlockHuntGame(Duck.Pool duckPool, KoBlock.Pool koBlockPool, TweeningManager tweeningManager)
+        public BlockHuntGame(Duck.Pool duckPool, KoBlock.Pool koBlockPool, ShootingManager shootingManager, TweeningManager tweeningManager)
         {
             _blockHuntRoot = new GameObject("BlockHuntRoot");
             _tweeningManager = tweeningManager;
+            _shootingManager = shootingManager;
             _koBlockPool = koBlockPool;
             _duckPool = duckPool;
 
